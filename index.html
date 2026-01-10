@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fleet Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-page="dashboard">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-badge">VR</div>
+          <div>
+            <div>Vehicle Routes</div>
+            <small class="muted">Admin Console</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="index.html" class="active">Dashboard</a>
+          <a href="routes.html">Add / View Routes</a>
+          <a href="summary.html">Summary Reports</a>
+          <a href="#export" id="nav-export">Export / Import</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <h1 class="section-title">Admin Dashboard</h1>
+        <div class="grid cards">
+          <div class="card">
+            <h3>Total Drivers</h3>
+            <div class="stat-value" id="stat-drivers">0</div>
+          </div>
+          <div class="card">
+            <h3>Total Vehicles</h3>
+            <div class="stat-value" id="stat-vehicles">0</div>
+          </div>
+          <div class="card">
+            <h3>Routes Today</h3>
+            <div class="stat-value" id="stat-routes-today">0</div>
+          </div>
+          <div class="card">
+            <h3>Expenditure Today</h3>
+            <div class="stat-value" id="stat-expenditure-today">GHS 0.00</div>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <section class="panel">
+          <h2 class="section-title">Driver Route Summary</h2>
+          <p class="muted">Totals keyed by Driver ID (primary identifier), with names shown when available.</p>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Driver ID</th>
+                  <th>Routes Taken</th>
+                </tr>
+              </thead>
+              <tbody id="driver-summary-body">
+                <tr><td colspan="2">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel" id="export">
+          <h2 class="section-title">Data Export / Import</h2>
+          <p class="muted">
+            Export saves a JSON snapshot to your local disk. Import restores data from a previous export.
+            Browsers require user permission to read files; no server is involved.
+          </p>
+          <div class="grid two-col">
+            <div>
+              <button id="export-btn" class="btn">Export Data</button>
+            </div>
+            <div>
+              <label for="import-input">Import from JSON</label>
+              <input type="file" id="import-input" accept=".json" />
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="storage.js"></script>
+  </body>
+</html>
+
