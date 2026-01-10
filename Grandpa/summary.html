@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summary Reports</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-page="summary">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-badge">VR</div>
+          <div>
+            <div>Vehicle Routes</div>
+            <small class="muted">Admin Console</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="index.html">Dashboard</a>
+          <a href="routes.html">Add / View Routes</a>
+          <a href="summary.html" class="active">Summary Reports</a>
+          <a href="#export" id="nav-export">Export / Import</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <h1 class="section-title">Summary & Reports</h1>
+        <p class="muted">
+          Daily, weekly, and monthly rollups calculated on the fly from stored routes.
+        </p>
+
+        <div class="grid cards" style="margin-top: 16px;">
+          <div class="card">
+            <h3>Daily Routes</h3>
+            <div class="stat-value" id="daily-routes">0</div>
+            <div class="muted">Today</div>
+          </div>
+          <div class="card">
+            <h3>Daily Expenditure</h3>
+            <div class="stat-value" id="daily-expense">GHS 0.00</div>
+            <div class="muted">Today</div>
+          </div>
+          <div class="card">
+            <h3>Weekly Routes</h3>
+            <div class="stat-value" id="weekly-routes">0</div>
+            <div class="muted">Last 7 days</div>
+          </div>
+          <div class="card">
+            <h3>Weekly Expenditure</h3>
+            <div class="stat-value" id="weekly-expense">GHS 0.00</div>
+            <div class="muted">Last 7 days</div>
+          </div>
+          <div class="card">
+            <h3>Monthly Routes</h3>
+            <div class="stat-value" id="monthly-routes">0</div>
+            <div class="muted">Last 30 days</div>
+          </div>
+          <div class="card">
+            <h3>Monthly Expenditure</h3>
+            <div class="stat-value" id="monthly-expense">GHS 0.00</div>
+            <div class="muted">Last 30 days</div>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <section class="panel" id="export">
+          <h2 class="section-title">Data Export / Import</h2>
+          <p class="muted">
+            Export produces a JSON file. Import lets you restore from that file. Browser security means you must
+            select a file manually; nothing is sent to any server.
+          </p>
+          <div class="grid two-col">
+            <div>
+              <button id="export-btn" class="btn">Export Data</button>
+            </div>
+            <div>
+              <label for="import-input">Import from JSON</label>
+              <input type="file" id="import-input" accept=".json" />
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="storage.js"></script>
+  </body>
+</html>
+
