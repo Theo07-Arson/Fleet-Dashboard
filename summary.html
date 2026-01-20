@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summary Reports</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-page="summary">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-badge">VR</div>
+          <div>
+            <div>Vehicle Routes</div>
+            <small class="muted">Admin Console</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="index.html">Dashboard</a>
+          <a href="routes.html">Add / View Routes</a>
+          <a href="summary.html" class="active">Summary Reports</a>
+          <a href="#export" id="nav-export">Export / Import</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <h1 class="section-title">Field Activity Reports & Summaries</h1>
+        <p class="muted">
+          Daily, weekly, and monthly rollups calculated on the fly from stored activities. Reports are updated in real-time.
+        </p>
+
+        <div class="grid cards" style="margin-top: 16px;">
+          <div class="card">
+            <h3>Daily Activities</h3>
+            <div class="stat-value" id="daily-routes">0</div>
+            <div class="muted">Today</div>
+          </div>
+          <div class="card">
+            <h3>Daily Revenue</h3>
+            <div class="stat-value" id="daily-expense">GHS 0.00</div>
+            <div class="muted">Today</div>
+          </div>
+          <div class="card">
+            <h3>Weekly Activities</h3>
+            <div class="stat-value" id="weekly-routes">0</div>
+            <div class="muted">Last 7 days</div>
+          </div>
+          <div class="card">
+            <h3>Weekly Revenue</h3>
+            <div class="stat-value" id="weekly-expense">GHS 0.00</div>
+            <div class="muted">Last 7 days</div>
+          </div>
+          <div class="card">
+            <h3>Monthly Activities</h3>
+            <div class="stat-value" id="monthly-routes">0</div>
+            <div class="muted">Last 30 days</div>
+          </div>
+          <div class="card">
+            <h3>Monthly Revenue</h3>
+            <div class="stat-value" id="monthly-expense">GHS 0.00</div>
+            <div class="muted">Last 30 days</div>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <section class="panel">
+          <h2 class="section-title">Driver Summary</h2>
+          <p class="muted">Activities and revenue per driver</p>
+          <div style="margin-bottom: 12px;">
+            <button class="btn secondary" id="print-driver-summary">Print</button>
+            <button class="btn" id="share-driver-summary">Share</button>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Driver ID</th>
+                  <th>Driver Name</th>
+                  <th>Total Activities</th>
+                  <th>Total Revenue</th>
+                </tr>
+              </thead>
+              <tbody id="driver-summary-body">
+                <tr><td colspan="4">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="spacer"></div>
+
+        <section class="panel">
+          <h2 class="section-title">Vehicle Summary</h2>
+          <p class="muted">Activities and revenue per vehicle</p>
+          <div style="margin-bottom: 12px;">
+            <button class="btn secondary" id="print-vehicle-summary">Print</button>
+            <button class="btn" id="share-vehicle-summary">Share</button>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Vehicle ID</th>
+                  <th>Vehicle Number</th>
+                  <th>Total Activities</th>
+                  <th>Total Revenue</th>
+                </tr>
+              </thead>
+              <tbody id="vehicle-summary-body">
+                <tr><td colspan="4">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="spacer"></div>
+
+        <section class="panel">
+          <h2 class="section-title">Overall Summary</h2>
+          <p class="muted">All drivers & vehicles combined</p>
+          <div style="margin-bottom: 12px;">
+            <button class="btn secondary" id="print-overall-summary">Print</button>
+            <button class="btn" id="share-overall-summary">Share</button>
+          </div>
+          <div class="grid two-col">
+            <div class="card">
+              <h3>Total Activities</h3>
+              <div class="stat-value" id="overall-activities">0</div>
+            </div>
+            <div class="card">
+              <h3>Total Revenue</h3>
+              <div class="stat-value" id="overall-revenue">GHS 0.00</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="spacer"></div>
+
+        <section class="panel">
+          <h2 class="section-title">Custom Period Report</h2>
+          <form id="custom-report-form" class="grid">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+              <div>
+                <label for="period-start">Start Date</label>
+                <input type="date" id="period-start" required />
+              </div>
+              <div>
+                <label for="period-end">End Date</label>
+                <input type="date" id="period-end" required />
+              </div>
+              <div style="display:flex;align-items:flex-end;">
+                <button class="btn" type="submit">Generate Report</button>
+              </div>
+            </div>
+          </form>
+          <div id="custom-report-results" style="margin-top: 20px;"></div>
+        </section>
+          <h2 class="section-title">Data Export / Import</h2>
+          <p class="muted">
+            Export produces a JSON file. Import lets you restore from that file. Browser security means you must
+            select a file manually; nothing is sent to any server.
+          </p>
+          <div class="grid two-col">
+            <div>
+              <button id="export-btn" class="btn">Export Data</button>
+            </div>
+            <div>
+              <label for="import-input">Import from JSON</label>
+              <input type="file" id="import-input" accept=".json" />
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="storage.js"></script>
+  </body>
+</html>
+
