@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Routes | Vehicle Tracking</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-page="routes">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-badge">VR</div>
+          <div>
+            <div>Vehicle Routes</div>
+            <small class="muted">Admin Console</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="index.html">Dashboard</a>
+          <a href="routes.html" class="active">Add / View Routes</a>
+          <a href="summary.html">Summary Reports</a>
+          <a href="#export" id="nav-export">Export / Import</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <h1 class="section-title">Driver & Vehicle Management</h1>
+        <div class="grid two-col">
+          <div class="card">
+            <h3>Add Driver</h3>
+            <form id="driver-form">
+              <div>
+                <label for="driverName">Driver name</label>
+                <input id="driverName" name="driverName" placeholder="e.g., Jane Doe" required />
+              </div>
+              <div>
+                <label for="assignedVehicle">Assign vehicle (optional)</label>
+                <select id="assignedVehicle" name="assignedVehicle" data-vehicle-select>
+                  <option value="">Select vehicle</option>
+                </select>
+              </div>
+              <button class="btn" type="submit">Save Driver</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h3>Add Vehicle</h3>
+            <form id="vehicle-form">
+              <div>
+                <label for="vehicleLabel">Vehicle ID / Number</label>
+                <input id="vehicleLabel" name="vehicleLabel" placeholder="e.g., TRK-204" required />
+              </div>
+              <button class="btn" type="submit">Save Vehicle</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="grid two-col" style="margin-top: 12px;">
+          <div class="card">
+            <h3>Drivers</h3>
+            <ul class="list" id="driver-list"></ul>
+          </div>
+          <div class="card">
+            <h3>Vehicles</h3>
+            <ul class="list" id="vehicle-list"></ul>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <section class="panel">
+          <h2 class="section-title">Route Tracking</h2>
+          <form id="route-form" class="grid two-col">
+            <div>
+              <label for="driver">Driver</label>
+              <select id="driver" name="driver" data-driver-select required></select>
+            </div>
+            <div>
+              <label for="vehicle">Vehicle</label>
+              <select id="vehicle" name="vehicle" data-vehicle-select required></select>
+            </div>
+            <div>
+              <label for="routeName">Route name</label>
+              <input id="routeName" name="routeName" placeholder="e.g., Downtown Loop" />
+            </div>
+            <div>
+              <label for="date">Date</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div>
+              <label for="cost">Cost / Expenditure</label>
+              <input type="number" id="cost" name="cost" placeholder="0.00" step="0.01" min="0" />
+            </div>
+            <div style="display:flex;align-items:flex-end;">
+              <button class="btn" type="submit">
+                <span id="route-submit-label">Save Route</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <div class="spacer"></div>
+
+        <section class="panel">
+          <h2 class="section-title">Saved Routes</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Driver</th>
+                  <th>Vehicle</th>
+                  <th>Route</th>
+                  <th>Date</th>
+                  <th>Cost</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="routes-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="spacer"></div>
+
+        <section class="panel" id="export">
+          <h2 class="section-title">Data Export / Import</h2>
+          <p class="muted">
+            Export downloads JSON to your disk. Import lets you upload the same file to restore it. Browsers
+            will ask permission to read the file; no data leaves your device.
+          </p>
+          <div class="grid two-col">
+            <div>
+              <button id="export-btn" class="btn">Export Data</button>
+            </div>
+            <div>
+              <label for="import-input">Import from JSON</label>
+              <input type="file" id="import-input" accept=".json" />
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="storage.js"></script>
+  </body>
+</html>
+
