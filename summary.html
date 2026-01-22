@@ -21,6 +21,7 @@
           <a href="routes.html">Add / View Routes</a>
           <a href="summary.html" class="active">Summary Reports</a>
           <a href="#export" id="nav-export">Export / Import</a>
+          <a href="#pdf-export" id="nav-pdf-export">Export to PDF</a>
         </nav>
       </aside>
 
@@ -71,6 +72,7 @@
           <div style="margin-bottom: 12px;">
             <button class="btn secondary" id="print-driver-summary">Print</button>
             <button class="btn" id="share-driver-summary">Share</button>
+            <button class="btn" id="pdf-driver-summary" style="background-color: #d4763a;">Export PDF</button>
           </div>
           <div class="table-wrapper">
             <table>
@@ -97,6 +99,7 @@
           <div style="margin-bottom: 12px;">
             <button class="btn secondary" id="print-vehicle-summary">Print</button>
             <button class="btn" id="share-vehicle-summary">Share</button>
+            <button class="btn" id="pdf-vehicle-summary" style="background-color: #d4763a;">Export PDF</button>
           </div>
           <div class="table-wrapper">
             <table>
@@ -122,6 +125,7 @@
           <p class="muted">All drivers & vehicles combined</p>
           <div style="margin-bottom: 12px;">
             <button class="btn secondary" id="print-overall-summary">Print</button>
+            <button class="btn" id="pdf-overall-summary" style="background-color: #d4763a;">Export PDF</button>
             <button class="btn" id="share-overall-summary">Share</button>
           </div>
           <div class="grid two-col">
@@ -156,7 +160,8 @@
             </div>
           </form>
           <div id="custom-report-results" style="margin-top: 20px;"></div>
-        </section>
+        
+        <section class="panel">
           <h2 class="section-title">Data Export / Import</h2>
           <p class="muted">
             Export produces a JSON file. Import lets you restore from that file. Browser security means you must
@@ -174,6 +179,8 @@
         </section>
       </main>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>    </div>
 
     <script src="storage.js"></script>
   </body>

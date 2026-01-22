@@ -21,6 +21,7 @@
           <a href="routes.html" class="active">Add / View Routes</a>
           <a href="summary.html">Summary Reports</a>
           <a href="#export" id="nav-export">Export / Import</a>
+          <a href="#pdf-export" id="nav-pdf-export">Export to PDF</a>
         </nav>
       </aside>
 
@@ -123,6 +124,7 @@
               <button class="btn secondary" id="reset-filters">Reset Filters</button>
               <button class="btn" id="print-activities">Print</button>
               <button class="btn" id="share-activities">Share</button>
+              <button class="btn" id="pdf-activities" style="background-color: #d4763a;">Export PDF</button>
             </div>
           </div>
         </section>
@@ -169,6 +171,7 @@
       </main>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="storage.js"></script>
   </body>
 </html>

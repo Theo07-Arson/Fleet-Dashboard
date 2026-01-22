@@ -531,6 +531,35 @@ function shareContent(elementId, title = "Report") {
   }
 }
 
+function exportToPDF(elementId, filename = "report.pdf") {
+  const element = document.getElementById(elementId);
+  if (!element) {
+    alert("Element not found");
+    return;
+  }
+
+  const opt = {
+    margin: 10,
+    filename: filename,
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { orientation: "portrait", unit: "mm", format: "a4" },
+  };
+
+  // Check if html2pdf is available
+  if (typeof html2pdf === "undefined") {
+    alert("PDF export library not loaded. Please check your internet connection.");
+    return;
+  }
+
+  try {
+    html2pdf().set(opt).from(element).save();
+  } catch (err) {
+    console.error("PDF export failed:", err);
+    alert("Failed to export PDF: " + err.message);
+  }
+}
+
 /* Page initializers */
 function initDashboardPage() {
   populateDashboard();
@@ -674,6 +703,13 @@ function initRoutesPage() {
     shareContent("routes-tbody", "Field Activities Report");
   });
 
+  document.getElementById("pdf-activities")?.addEventListener("click", () => {
+    const table = document.querySelector("table");
+    if (table) {
+      exportToPDF("routes-tbody", `activities-${new Date().toISOString().split('T')[0]}.pdf`);
+    }
+  });
+
   populateDropdowns();
   renderDriverVehicleLists();
   renderFilteredRoutesTable();
@@ -746,12 +782,18 @@ function initSummaryPage() {
   document.getElementById("share-driver-summary")?.addEventListener("click", () => {
     shareContent("driver-summary-body", "Driver Summary Report");
   });
+  document.getElementById("pdf-driver-summary")?.addEventListener("click", () => {
+    exportToPDF("driver-summary-body", `driver-summary-${new Date().toISOString().split('T')[0]}.pdf`);
+  });
   
   document.getElementById("print-vehicle-summary")?.addEventListener("click", () => {
     printContent("vehicle-summary-body", "Vehicle Summary Report");
   });
   document.getElementById("share-vehicle-summary")?.addEventListener("click", () => {
     shareContent("vehicle-summary-body", "Vehicle Summary Report");
+  });
+  document.getElementById("pdf-vehicle-summary")?.addEventListener("click", () => {
+    exportToPDF("vehicle-summary-body", `vehicle-summary-${new Date().toISOString().split('T')[0]}.pdf`);
   });
   
   document.getElementById("print-overall-summary")?.addEventListener("click", () => {
@@ -781,6 +823,28 @@ function initSummaryPage() {
       document.body.removeChild(textarea);
       alert("Report copied to clipboard!");
     }
+  });
+  document.getElementById("pdf-overall-summary")?.addEventListener("click", () => {
+    const overallDiv = document.createElement("div");
+    overallDiv.innerHTML = `
+      <h2>Overall Summary Report</h2>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ddd;"><strong>Total Activities</strong></td>
+          <td style="padding: 10px; border: 1px solid #ddd;">${totalActivities}</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ddd;"><strong>Total Revenue</strong></td>
+          <td style="padding: 10px; border: 1px solid #ddd;">GHS ${totalRevenue.toFixed(2)}</td>
+        </tr>
+      </table>
+      <p style="margin-top: 20px; color: #666; font-size: 12px;">Generated on ${new Date().toLocaleString()}</p>
+    `;
+    const tempId = "temp-overall-pdf-" + Date.now();
+    overallDiv.id = tempId;
+    document.body.appendChild(overallDiv);
+    exportToPDF(tempId, `overall-summary-${new Date().toISOString().split('T')[0]}.pdf`);
+    setTimeout(() => document.body.removeChild(overallDiv), 1000);
   });
 }
 

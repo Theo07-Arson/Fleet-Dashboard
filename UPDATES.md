@@ -3,6 +3,35 @@
 ## Overview
 The application has been completely updated from a "Route Tracking" system to a comprehensive "Field Activity Tracking" system with enhanced reporting, filtering, and data management capabilities.
 
+## 🆕 Latest Update: PDF Export Feature
+
+### What's New
+**PDF Export** is now available on all report pages to solve data loss issues:
+- Click "Export PDF" button to download professional reports
+- Reports include date, time, and formatted tables
+- Perfect for printing or sharing via email
+- Files are named with today's date (e.g., `driver-summary-2026-01-22.pdf`)
+
+### Where to Export as PDF
+1. **Summary Reports page**
+   - Driver Summary Report
+   - Vehicle Summary Report
+   - Overall Summary Report
+2. **Routes page**
+   - Recorded Activities table
+
+### How to Use
+1. Go to the desired report page
+2. Click "Export PDF" button (orange button)
+3. Browser will download the PDF file
+4. Open with any PDF reader to print or share
+
+### Technical Details
+- Uses **html2pdf.js** library (CDN-hosted)
+- Requires internet connection for PDF generation
+- Automatically includes timestamp on all exports
+- Works in all modern browsers (Chrome, Firefox, Safari, Edge)
+
 ## Key Changes
 
 ### 1. **Data Model Transformation** (storage.js)
